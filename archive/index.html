@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- OGPの設定 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ランダウリンクツリー" />
+  <meta property="og:description" content="リンクを掲載しています" />
+  <meta property="og:url" content="https://landautree.com/" />
+  <meta property="og:site_name" content="ランダウリンクツリー" />
+  <!-- <meta property="article:publisher" content="(6)FacebookページのURL" /> -->
+  <meta property="og:image" content="./img/twittercard.png" />
+  <!-- Twitterカードの設定 -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@landau5526" />
+
+  <title>LandauLink</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="apple-touch-icon" type="image/png" href="./img/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="./img/icon-192x192.png">
+  <style>
+    #link-btn:hover{
+      box-shadow: 0 16px 20px -8px rgba(0, 0, 0, 0.4);
+    }
+    #link-icon{
+      max-width: 40px;
+    }
+    .loading {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      /* 背景色の設定 */
+      background-color: #ffffff;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column vh-100 bg-dark bg-gradient">
+
+  <main class="mb-auto text-white m-3 container">
+    <!--タイトル-->
+    <div id="title">
+        <h1>
+            Landau Archive
+        </h1>
+    </div>
+
+    <!--戻る-->
+    <div>
+        <input id="button" class="btn btn-primary" value="戻る/Back" onclick="location.href='/'">
+    </div>
+
+    <!--リスト-->
+    <div class="accordion" id="accordionExample">
+        <!--アコーディオンアイテム-->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button type="button" class="accordion-button fw-bold" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <!--ここにタイトルを記入-->
+                    スマブラWiiU/SSB4
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!--ここに内容を記入-->
+                    <table class="table table-dark table-striped">
+                        <!--見出し-->
+                        <tr>
+                            <td>
+                                No.
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                File
+                            </td>
+                            <td>
+                                Summary
+                            </td>
+                            <td>
+                                Size
+                            </td>
+                        </tr>
+
+                        <!--MODリスト-->
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                <button onclick="location.href='./download/SmashBrosWiiU_Modpack_x150_v20241124.zip'" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                            <td>
+                                Modpack x150
+                            </td>
+                            <td>
+                                巨大化MOD
+                                倍率150倍
+                                <br>
+                                パスワードは私の名前、6文字、小文字、アルファベット
+                            </td>
+                            <td>
+                                751 MB
+                            </td>
+                        </tr>
+
+                        <!--MODリスト-->
+                        <tr>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                Comming Soon
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ポップアップの内容 -->
+    <div class="modal fade text-black" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    広告
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="adv-ninja">
+                  <!-- admax -->
+                  <script src="https://adm.shinobi.jp/s/dd14532c095020c1fb293dae89c94ba0"></script>
+                  <!-- admax -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
+        </div>
+        </div>
+    </div>
+    
+  </main>
+
+</body>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</html>
