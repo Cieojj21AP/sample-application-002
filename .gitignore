@@ -1,6 +1,12 @@
 .vscode
+.gitignore
 __pycache__
 *.pyc
 .DS_Store
 **\download\*
 *.zip
+*.webp
+*.jpg
+*.json
+*.mp3
+*.png

@@ -1,0 +1,123 @@
+/* 表示エリア全体 */
+body {
+    min-height: 100vh;
+    background-color: darkgray;
+}
+
+/* ナビ画像表示エリア */
+.view-area {
+    width: 544px;
+    background-color: darkslategray;
+    margin: 0 auto 0 auto;
+    color: white;
+}
+
+/* 画像表示エリア */
+.rpgconv-area {
+    position: relative;
+}
+
+/* ナビゲーター */
+.navigater-a {
+    width: 50%;
+    display:inline-block;
+}
+
+/* ナビゲーター */
+.navigater-b {
+    width: 50%;
+    display:inline-block;
+    float: right;
+    text-align: right;
+    padding-right: 5px;
+}
+
+/* 画像表示エリア */
+.rpgconv-text {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+
+    width: 524px;
+    height: 140px;
+    background-color: rgba(0, 0, 255, 0.4);
+    border-color: gray;
+    border-width: 10px;
+    border-style: outset;
+    border-radius: 30px;
+    margin: 10px 10px 10px 10px;
+
+    font-size: 18px;
+    padding: 2%;
+}
+
+/* スタートボタン */
+.rpgconv-start-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0.75;
+}
+
+/* アニメーション表示エリア */
+.rpgconv-anime-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* エンド表示エリア */
+.rpgconv-end-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    background-color: black;
+}
+
+/* 音再生エリア */
+.rpgconv-sound-area {
+    display: none;
+}
+
+/* ============================================ */
+/* アニメーション定義 */
+/* ============================================ */
+/* 画像切り替えアニメーション */
+@keyframes image-fadeout-animation {
+    0% {
+        opacity: 0;
+        visibility: visible;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* エンド表示アニメーション */
+@keyframes end-show-animation {
+    0% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0.8;
+        visibility: visible;
+    }
+}
