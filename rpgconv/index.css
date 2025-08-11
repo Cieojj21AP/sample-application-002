@@ -18,18 +18,47 @@ body {
 }
 
 /* ナビゲーター */
+.navigater {
+    height: 60px;
+}
+
+/* ナビゲーター */
 .navigater-a {
-    width: 50%;
-    display:inline-block;
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    box-sizing: border-box;
 }
 
 /* ナビゲーター */
 .navigater-b {
-    width: 50%;
-    display:inline-block;
+    width: 75%;
+    height: 100%;
+    display: block;
     float: right;
     text-align: right;
-    padding-right: 5px;
+}
+
+/* ナビゲーター */
+.navigater-b table {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    font-size: 12px;
+}
+
+/* ナビゲーター */
+.navigater-b td {
+    padding: 0;
+}
+
+/* ドロップダウンリスト */
+#slide-current-num {
+}
+
+/* ドロップダウンリスト文字色 */
+.select-dropdown{
+    color: white;
 }
 
 /* 画像表示エリア */
@@ -49,6 +78,11 @@ body {
 
     font-size: 18px;
     padding: 2%;
+}
+
+/* ドロップダウン */
+.slide-current-num-div {
+    width: 25%;
 }
 
 /* スタートボタン */

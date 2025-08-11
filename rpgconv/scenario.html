@@ -26,36 +26,59 @@
         <div class="view-area">
             <div class="navigater">
                 <div class="navigater-a">
-                    ナビゲーター
+                    <label><font color="white">次へ</font></label>
                     <a class="btn-floating waves-effect waves-light red" id="rpgconv-next-btn">
                         <i class="material-icons">
                             arrow_forward
                         </i>
                     </a>
-                    <select id="slide-current-num">現在のスライド：</select>
                 </div>
                 <div class="navigater-b switch" id="rpgconv-textbox-sw-div">
-                    テキスト
-                    <label>
-                        <input type="checkbox" id="rpgconv-textbox-sw">
-                        <span class="lever"></span>
-                    </label>
-                    音再生
-                    <label>
-                        <input type="checkbox" id="rpgconv-audio-sw">
-                        <span class="lever"></span>
-                    </label>
-                    <br>
-                    アニメ
-                    <label>
-                        <input type="checkbox" id="rpgconv-animation-sw">
-                        <span class="lever"></span>
-                    </label>
-                    自動
-                    <label>
-                        <input type="checkbox" id="rpgconv-auto-sw">
-                        <span class="lever"></span>
-                    </label>
+                    <table>
+                        <tr>
+                            <td rowspan="2">
+                                <select id="slide-current-num">現在のスライド：</select>
+                            </td>
+                            <td>
+                                テキスト
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="rpgconv-textbox-sw">
+                                    <span class="lever"></span>
+                                </label>
+                            </td>
+                            <td>
+                                音再生
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="rpgconv-audio-sw">
+                                    <span class="lever"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                アニメ
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="rpgconv-animation-sw">
+                                    <span class="lever"></span>
+                                </label>
+                            </td>
+                            <td>
+                                自動
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="rpgconv-auto-sw">
+                                    <span class="lever"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="rpgconv-area">

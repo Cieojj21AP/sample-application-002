@@ -144,7 +144,7 @@ function initialSlide() {
     scenario.setTextSrc(RPGCONV_TEXT_ID, 0)
 
     // スライド番号リストに追加する
-    for(let i = 0; i < scenario.getSlideNum(); i++) {
+    for(let i = 1; i <= scenario.getSlideNum(); i++) {
         // オプションインスタンスを生成する
         let option = document.createElement("option");
 
@@ -237,6 +237,9 @@ window.onload = function() {
 
     // アニメーションSWをONにする
     changeAnimeSwitch(true);
+
+    // ドロップダウンを表示する
+    $('select').formSelect();
 }
 
 // ========================================
