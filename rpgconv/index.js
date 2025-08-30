@@ -11,10 +11,11 @@ const RPGCONV_IMG_ELEM = document.getElementById(RPGCONV_IMG_ID);
 const RPGCONV_TEXT_ID = "rpgconv-text";
 const RPGCONV_TEXT_ELEM = document.getElementById(RPGCONV_TEXT_ID);
 const RPGCONV_SELECT_ID = "slide-current-num";
+const RPGCONV_SELECT_ELEM = document.getElementById(RPGCONV_SELECT_ID);
 const RPGCONV_START_BTN_DIV_ID = "rpgconv-start-btn-div"
 const RPGCONV_START_BTN_DIV_ELEM = document.getElementById(RPGCONV_START_BTN_DIV_ID);
-const RPGCONV_START_BTN_ID = "rpgconv-start-btn1"
-const RPGCONV_START_BTN_ELEM = document.getElementById(RPGCONV_START_BTN_ID);
+// const RPGCONV_START_BTN_ID = "rpgconv-start-btn1"
+// const RPGCONV_START_BTN_ELEM = document.getElementById(RPGCONV_START_BTN_ID);
 const RPGCONV_NEXT_BTN_ID = "rpgconv-next-btn";
 const RPGCONV_NEXT_BTN_ELEM = document.getElementById(RPGCONV_NEXT_BTN_ID);
 const RPGCONV_TXT_SW_ID = "rpgconv-textbox-sw";
@@ -144,12 +145,16 @@ function initialSlide() {
     scenario.setTextSrc(RPGCONV_TEXT_ID, 0)
 
     // スライド番号リストに追加する
-    for(let i = 1; i <= scenario.getSlideNum(); i++) {
+    for(let i = 0; i < scenario.getSlideNum(); i++) {
         // オプションインスタンスを生成する
         let option = document.createElement("option");
 
         // オプションにプロパティを設定する
-        option.text = i;
+        if (i == 0) {
+            option.text = "表紙"
+        } else {
+            option.text = "ページ：" + i;
+        }
         option.value = i;
 
         // オプションを追加する
@@ -222,6 +227,11 @@ function nextSlide() {
     document.getElementById(RPGCONV_SELECT_ID).value = next_slide_num;
 }
 
+// 特定のスライドにジャンプ
+function jumpSlide() {
+    // アニメーションSWがONのときはOFFに変更する
+}
+
 // ========================================
 // ページ読み込み時
 // ========================================
@@ -237,16 +247,13 @@ window.onload = function() {
 
     // アニメーションSWをONにする
     changeAnimeSwitch(true);
-
-    // ドロップダウンを表示する
-    $('select').formSelect();
 }
 
 // ========================================
 // イベントリスナー
 // ========================================
 // スタートボタンクリック時の処理
-RPGCONV_START_BTN_ELEM.addEventListener('click', () => {
+RPGCONV_START_BTN_DIV_ELEM.addEventListener('click', () => {
     // スライドを1つ進める
     nextSlide();
 });
@@ -294,4 +301,9 @@ RPGCONV_AUTO_SW_ELEM.addEventListener('change', () => {
 RPGCONV_REFRESH_BTN_ELEM.addEventListener('click', () => {
     // リロードする
     document.location.reload();
+});
+
+// スライド番号リスト変更時
+RPGCONV_SELECT_ELEM .addEventListener('change', () => {
+    console.log("changess");
 });

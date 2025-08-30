@@ -10,9 +10,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
         <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
         <!-- material icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,16 +26,16 @@
         <div class="view-area">
             <div class="navigater">
                 <div class="navigater-a">
-                    <label><font color="white">次へ</font></label>
-                    <a class="btn-floating waves-effect waves-light red" id="rpgconv-next-btn">
-                        <i class="material-icons">
-                            arrow_forward
-                        </i>
-                    </a>
+                    <button type="button" id="rpgconv-next-btn">
+                        Next ⇒
+                    </button>
                 </div>
-                <div class="navigater-b switch" id="rpgconv-textbox-sw-div">
+                <div class="navigater-b" id="rpgconv-textbox-sw-div">
                     <table>
                         <tr>
+                            <td rowspan="2">
+                                現在のページ：
+                            </td>
                             <td rowspan="2">
                                 <select id="slide-current-num">現在のスライド：</select>
                             </td>
@@ -43,19 +43,13 @@
                                 テキスト
                             </td>
                             <td>
-                                <label>
-                                    <input type="checkbox" id="rpgconv-textbox-sw">
-                                    <span class="lever"></span>
-                                </label>
+                                <input class="settings-checkbox" type="checkbox" id="rpgconv-textbox-sw">
                             </td>
                             <td>
                                 音再生
                             </td>
                             <td>
-                                <label>
-                                    <input type="checkbox" id="rpgconv-audio-sw">
-                                    <span class="lever"></span>
-                                </label>
+                                <input class="settings-checkbox" type="checkbox" id="rpgconv-audio-sw">
                             </td>
                         </tr>
                         <tr>
@@ -63,19 +57,13 @@
                                 アニメ
                             </td>
                             <td>
-                                <label>
-                                    <input type="checkbox" id="rpgconv-animation-sw">
-                                    <span class="lever"></span>
-                                </label>
+                                <input class="settings-checkbox" type="checkbox" id="rpgconv-animation-sw">
                             </td>
                             <td>
-                                自動
+                                オート
                             </td>
                             <td>
-                                <label>
-                                    <input type="checkbox" id="rpgconv-auto-sw">
-                                    <span class="lever"></span>
-                                </label>
+                                <input class="settings-checkbox" type="checkbox" id="rpgconv-auto-sw">
                             </td>
                         </tr>
                     </table>
@@ -87,11 +75,13 @@
                 <!-- テキスト表示エリア -->
                 <div class="rpgconv-text" id="rpgconv-text" style="display: none;"></div>
                 <!-- スタートボタン -->
-                <div class="rpgconv-start-btn" id="rpgconv-start-btn-div">
-                    <a class="waves-effect waves-light btn-large" id="rpgconv-start-btn1">
-                        スタート
-                    </a>
-                </div>
+                <!-- <a id="rpgconv-start-btn1"> -->
+                    <div class="rpgconv-start-btn" id="rpgconv-start-btn-div">
+                        <p>
+                            スタート
+                        </p>
+                    </div>
+                <!-- </a> -->
                 <!-- アニメーション表示エリア -->
                 <div class="rpgconv-anime-area" id="rpgconv-anime-area"></div>
                 <!-- エンド表示エリア -->
@@ -99,11 +89,9 @@
                     <h2>
                         もう一度見る
                     </h2>
-                    <a class="btn-floating waves-effect waves-light blue" id="rpgconv-refresh-btn">
-                        <i class="material-icons">
-                            autorenew
-                        </i>
-                    </a>
+                    <i class="material-icons" id="rpgconv-refresh-btn">
+                        autorenew
+                    </i>
                 </div>
 
                 <!-- 音再生エリア -->

@@ -28,6 +28,16 @@ body {
     height: 100%;
     display: inline-block;
     box-sizing: border-box;
+    padding: 10px;
+}
+
+/* 次へボタン */
+#rpgconv-next-btn {
+    width: 100px;
+    height: 45px;
+    background-color: green;
+    border-radius: 25px;
+    color: white;
 }
 
 /* ナビゲーター */
@@ -42,9 +52,10 @@ body {
 /* ナビゲーター */
 .navigater-b table {
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
     padding: 0;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /* ナビゲーター */
@@ -54,11 +65,12 @@ body {
 
 /* ドロップダウンリスト */
 #slide-current-num {
+    width: 85%;
+    height: 75%;
 }
 
-/* ドロップダウンリスト文字色 */
-.select-dropdown{
-    color: white;
+.settings-checkbox {
+    transform: scale(1.5);
 }
 
 /* 画像表示エリア */
@@ -66,6 +78,7 @@ body {
     position: absolute;
     bottom: 0%;
     left: 0%;
+    box-sizing: border-box;
 
     width: 524px;
     height: 140px;
@@ -91,7 +104,19 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    width: 150px;
+    height: 56px;
+    background-color: green;
     opacity: 0.75;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* スタートボタン（マウスオーバー） */
+.rpgconv-start-btn:hover {
+    animation-name: rpgconv-start-btn-bgcolor;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 
 /* アニメーション表示エリア */
@@ -153,5 +178,15 @@ body {
     100% {
         opacity: 0.8;
         visibility: visible;
+    }
+}
+
+@keyframes rpgconv-start-btn-bgcolor {
+    0% {
+        background-color: green;
+    }
+
+    100% {
+        background-color: darkblue;
     }
 }
