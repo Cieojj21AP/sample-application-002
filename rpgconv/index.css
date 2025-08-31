@@ -4,6 +4,7 @@ body {
     background-color: darkgray;
 }
 
+/* ================================== */
 /* ナビ画像表示エリア */
 .view-area {
     width: 544px;
@@ -31,15 +32,6 @@ body {
     padding: 10px;
 }
 
-/* 次へボタン */
-#rpgconv-next-btn {
-    width: 100px;
-    height: 45px;
-    background-color: green;
-    border-radius: 25px;
-    color: white;
-}
-
 /* ナビゲーター */
 .navigater-b {
     width: 75%;
@@ -63,12 +55,43 @@ body {
     padding: 0;
 }
 
+/* 注意書きエリア */
+.caution {
+    width: 544px;
+    margin: 0 auto 0 auto;
+    color: black;
+}
+/* ================================== */
+/* 次へボタン */
+#rpgconv-next-btn {
+    width: 100px;
+    height: 45px;
+    background-color: darkgreen;
+    border-radius: 25px;
+    color: white;
+}
+
+/* ジャンプボタン */
+#rpgconv-jump-sw {
+    height: 42px;
+    background-color: darkcyan;
+    color: white;
+    border-color: white;
+    border-radius: 30% 0% 0% 30%;
+}
+
 /* ドロップダウンリスト */
 #slide-current-num {
     width: 85%;
     height: 75%;
+    float: left;
+    background-color: darkcyan;
+    color: white;
+    border-color: white;
+    border-radius: 0% 10% 10% 0%;
 }
 
+/* 設定チェックボックス */
 .settings-checkbox {
     transform: scale(1.5);
 }
@@ -115,7 +138,7 @@ body {
 /* スタートボタン（マウスオーバー） */
 .rpgconv-start-btn:hover {
     animation-name: rpgconv-start-btn-bgcolor;
-    animation-duration: 1s;
+    animation-duration: 0.4s;
     animation-fill-mode: forwards;
 }
 

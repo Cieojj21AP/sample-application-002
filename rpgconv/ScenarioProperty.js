@@ -143,7 +143,7 @@ export class ScenarioProperty {
     }
 
     // IDもとに画像を設定する＋アニメーションつき
-    animationImage(elemid, anime_css, anime_css_name, current_slide_num, next_slide_num, time) {
+    animationImage(elemid, anime_css, anime_css_name, current_slide_num, next_slide_num, time, txt_area_elem) {
         // IDから要素を取得する
         let rpgconv_img_elem = document.getElementById(elemid);
         let rpgconv_anime_elem = document.getElementById(anime_css);
@@ -156,6 +156,12 @@ export class ScenarioProperty {
             // 画像要素にアニメーションを付与する
             rpgconv_anime_elem.style.animation = anime_css_name + " " + String(time) + "s 1";
             
+            // アニメーション中はテキストボックスを非表示にする
+            txt_area_elem.style.display = "none";
+            setTimeout(() => {
+                txt_area_elem.style.display = "block";
+            }, time * 2.5 * 1000);
+
             // 画像要素のソースを設定する
             // アニメーションの暗転している間に変更する
             setTimeout(() => {

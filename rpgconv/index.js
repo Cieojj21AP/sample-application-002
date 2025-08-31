@@ -18,6 +18,8 @@ const RPGCONV_START_BTN_DIV_ELEM = document.getElementById(RPGCONV_START_BTN_DIV
 // const RPGCONV_START_BTN_ELEM = document.getElementById(RPGCONV_START_BTN_ID);
 const RPGCONV_NEXT_BTN_ID = "rpgconv-next-btn";
 const RPGCONV_NEXT_BTN_ELEM = document.getElementById(RPGCONV_NEXT_BTN_ID);
+const RPGCONV_JUMP_BTN_ID = "rpgconv-jump-sw";
+const RPGCONV_JUMP_BTN_ELEM = document.getElementById(RPGCONV_JUMP_BTN_ID);
 const RPGCONV_TXT_SW_ID = "rpgconv-textbox-sw";
 const RPGCONV_TXT_SW_ELEM = document.getElementById(RPGCONV_TXT_SW_ID);
 const RPGCONV_ANIME_SW_ID = "rpgconv-animation-sw";
@@ -133,6 +135,11 @@ function changeAutoSwitch(bool) {
     return;
 }
 
+// 現在のスライド番号を取得
+function getSlideNum() {
+    return document.getElementById(RPGCONV_SELECT_ID).value;
+}
+
 // 画面読み込み時の画像表示エリアの処理
 function initialSlide() {
     // 引数を取得する
@@ -162,18 +169,10 @@ function initialSlide() {
     }
 }
 
-// 画像表示エリアの更新：次へ
-function nextSlide() {
-    let current_slide_num = document.getElementById(RPGCONV_SELECT_ID).value;
-    let next_slide_num;
-    let do_anime_bool = RPGCONV_ANIME_SW_ELEM.checked;
-    let do_audio_bool = RPGCONV_AUDIO_SW_ELEM.checked;
-
-    // スライドを１つ進める
-    next_slide_num = Number(current_slide_num) + 1;
-
+// スライド変更
+function changeSlide(do_anime_bool_, do_audio_bool_, current_slide_num_, next_slide_num_) {
     // スライドが0（サムネ）の時の処理
-    if( current_slide_num == 0 ) {
+    if( current_slide_num_ == 0 ) {
         // テキスト表示スイッチをonにする
         changeTextSwitch(true);
 
@@ -185,9 +184,17 @@ function nextSlide() {
     }
 
     // 最後のスライドの場合は次へボタンを無効化する
-    if( next_slide_num == scenario.getSlideNum()) {
-        RPGCONV_NEXT_BTN_ELEM.style.visibility = "hidden";
+    if( Number(current_slide_num_) + 1 == scenario.getSlideNum()) {
+        // 自動スイッチOFF
         changeAutoSwitch(false);
+        changeAutoSWFalse();
+
+        // ボタン要素を無効にする
+        RPGCONV_NEXT_BTN_ELEM.style.visibility = "hidden";
+        RPGCONV_JUMP_BTN_ELEM.style.visibility = "hidden";
+        RPGCONV_AUTO_SW_ELEM.disabled = true;
+
+        // 終了エリアを表示する
         showEndArea();
         return;
     }
@@ -197,39 +204,91 @@ function nextSlide() {
     }
 
     // スライドの要素を変更する
-    if(do_anime_bool) {
+    if(do_anime_bool_) {
         // アニメーションSWがONのときはアニメーションをする
         scenario.animationImage(
             RPGCONV_IMG_ID, 
             RPGCONV_ANIMATION_ID, 
             IMAGE_FADEOUT_CSS, 
-            current_slide_num, 
-            next_slide_num, 
-            2);
+            current_slide_num_, 
+            next_slide_num_, 
+            2,
+            RPGCONV_TEXT_ELEM);
         scenario.animationText(
             RPGCONV_TEXT_ID, 
             DOT_SPAN_CLASS_NAME, 
-            next_slide_num, 
+            next_slide_num_, 
             DELAY_MS);
         
         // 音再生にチェックがついているときは再生する
-        if(do_audio_bool) {
+        if(do_audio_bool_) {
             scenario.animationSound(
                 RPGCONV_SOUND_AREA_ID,
-                next_slide_num);
+                next_slide_num_);
         }
     } else {
         // アニメーションSWがOFFのときはアニメーションをしない
-        scenario.setImageSrc(RPGCONV_IMG_ID, next_slide_num);
-        scenario.setTextSrc(RPGCONV_TEXT_ID, next_slide_num);
+        scenario.setImageSrc(RPGCONV_IMG_ID, next_slide_num_);
+        scenario.setTextSrc(RPGCONV_TEXT_ID, next_slide_num_);
     }
+}
+
+// 画像表示エリアの更新：次へ
+function nextSlide() {
+    let current_slide_num = getSlideNum();
+    let next_slide_num;
+    let do_anime_bool = RPGCONV_ANIME_SW_ELEM.checked;
+    let do_audio_bool = RPGCONV_AUDIO_SW_ELEM.checked;
+
+    // スライドを１つ進める
+    next_slide_num = Number(current_slide_num) + 1;
+
+    // スライド変更
+    changeSlide(do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
+
     // プルダウンを現在のスライド番号に変更する
     document.getElementById(RPGCONV_SELECT_ID).value = next_slide_num;
 }
 
+// 自動スイッチON時の処理
+function changeAutoSWTrue() {
+    // スイッチがONの時は自動で進む
+    interval_id = setInterval(() => {
+        // スライドを1つ進める
+        nextSlide();
+    }, DELAY_MS * 110 + 1500);
+
+    // 次へボタンを無効にする
+    RPGCONV_NEXT_BTN_ELEM.disabled = true;
+    RPGCONV_IMG_ELEM.style.pointerEvents = "none";
+}
+
+// 自動スイッチOFF時の処理
+function changeAutoSWFalse() {
+    // スイッチがOFFの時はキャンセルする
+    clearInterval(interval_id);
+
+    // 次へボタンを有効にする
+    RPGCONV_NEXT_BTN_ELEM.disabled = false;
+    RPGCONV_IMG_ELEM.style.pointerEvents = "auto";
+}
+
 // 特定のスライドにジャンプ
 function jumpSlide() {
-    // アニメーションSWがONのときはOFFに変更する
+    let current_slide_num = 0;
+    let next_slide_num = getSlideNum();
+    let do_auto_bool = RPGCONV_AUTO_SW_ELEM.checked;
+    let do_anime_bool = RPGCONV_ANIME_SW_ELEM.checked;
+    let do_audio_bool = RPGCONV_AUDIO_SW_ELEM.checked;
+
+    // 自動SWがONのときはOFFに変更する
+    if(do_auto_bool){
+        changeAutoSwitch(false);
+        changeAutoSWFalse();
+    }
+
+    // 対象のスライドにジャンプする
+    changeSlide(do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
 }
 
 // ========================================
@@ -262,12 +321,26 @@ RPGCONV_START_BTN_DIV_ELEM.addEventListener('click', () => {
 RPGCONV_NEXT_BTN_ELEM.addEventListener('click', () => {
     // スライドを1つ進める
     nextSlide();
+
+    // 一定時間無効にする
+    RPGCONV_NEXT_BTN_ELEM.disabled = true;
+    window.setTimeout(function(){
+        // ボタン要素を有効にする
+        RPGCONV_NEXT_BTN_ELEM.disabled = false;
+    }, 1000);
 });
 
 // 画像クリック時の処理
 RPGCONV_IMG_ELEM.addEventListener('click', () => {
     // スライドを1つ進める
     nextSlide();
+
+    // 一定時間無効にする
+    RPGCONV_IMG_ELEM.style.pointerEvents = "none";
+    window.setTimeout(function(){
+        // ボタン要素を有効にする
+        RPGCONV_IMG_ELEM.style.pointerEvents = "auto";
+    }, 2000);
 });
 
 // テキスト表示スイッチ変更時の処理
@@ -285,15 +358,12 @@ RPGCONV_TXT_SW_ELEM.addEventListener('change', () => {
 // 自動スイッチ変更時の処理
 RPGCONV_AUTO_SW_ELEM.addEventListener('change', () => {
     if(RPGCONV_AUTO_SW_ELEM.checked) {
-        // スイッチがONの時は自動で進む
-        interval_id = setInterval(() => {
-            // スライドを1つ進める
-            nextSlide();
-        }, DELAY_MS * 110 + 1500);
+        // スイッチがON時の処理
+        changeAutoSWTrue();
     }
     else {
-        // スイッチがOFFの時はキャンセルする
-        clearInterval(interval_id);
+        // スイッチOFF時の処理
+        changeAutoSWFalse();
     }
 });
 
@@ -303,7 +373,15 @@ RPGCONV_REFRESH_BTN_ELEM.addEventListener('click', () => {
     document.location.reload();
 });
 
-// スライド番号リスト変更時
-RPGCONV_SELECT_ELEM .addEventListener('change', () => {
-    console.log("changess");
+// ジャンプボタンクリック時の処理
+RPGCONV_JUMP_BTN_ELEM.addEventListener('click', () => {
+    // ジャンプ処理
+    jumpSlide();
+    
+    // 一定時間無効にする
+    RPGCONV_JUMP_BTN_ELEM.disabled = true;
+    window.setTimeout(function(){
+        // ボタン要素を有効にする
+        RPGCONV_JUMP_BTN_ELEM.disabled = false;
+    }, 1000);
 });
