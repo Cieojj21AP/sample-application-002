@@ -96,7 +96,7 @@ body {
     transform: scale(1.5);
 }
 
-/* 画像表示エリア */
+/* テキスト表示エリア */
 .rpgconv-text {
     position: absolute;
     bottom: 0%;
@@ -165,6 +165,15 @@ body {
     visibility: hidden;
     opacity: 0;
     background-color: black;
+}
+
+/* アイコン表示エリア */
+.rpgconv-icon-area {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    box-sizing: border-box;
+
 }
 
 /* 音再生エリア */

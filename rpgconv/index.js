@@ -14,8 +14,6 @@ const RPGCONV_SELECT_ID = "slide-current-num";
 const RPGCONV_SELECT_ELEM = document.getElementById(RPGCONV_SELECT_ID);
 const RPGCONV_START_BTN_DIV_ID = "rpgconv-start-btn-div"
 const RPGCONV_START_BTN_DIV_ELEM = document.getElementById(RPGCONV_START_BTN_DIV_ID);
-// const RPGCONV_START_BTN_ID = "rpgconv-start-btn1"
-// const RPGCONV_START_BTN_ELEM = document.getElementById(RPGCONV_START_BTN_ID);
 const RPGCONV_NEXT_BTN_ID = "rpgconv-next-btn";
 const RPGCONV_NEXT_BTN_ELEM = document.getElementById(RPGCONV_NEXT_BTN_ID);
 const RPGCONV_JUMP_BTN_ID = "rpgconv-jump-sw";
@@ -137,14 +135,11 @@ function changeAutoSwitch(bool) {
 
 // 現在のスライド番号を取得
 function getSlideNum() {
-    return document.getElementById(RPGCONV_SELECT_ID).value;
+    return RPGCONV_SELECT_ELEM.value;
 }
 
 // 画面読み込み時の画像表示エリアの処理
 function initialSlide() {
-    // 引数を取得する
-    let select_elem = document.getElementById(RPGCONV_SELECT_ID);
-
     // 画像ソースを指定する
     scenario.setImageSrc(RPGCONV_IMG_ID, 0)
 
@@ -165,7 +160,7 @@ function initialSlide() {
         option.value = i;
 
         // オプションを追加する
-        select_elem.appendChild(option);
+        RPGCONV_SELECT_ELEM.appendChild(option);
     }
 }
 
@@ -247,7 +242,7 @@ function nextSlide() {
     changeSlide(do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
 
     // プルダウンを現在のスライド番号に変更する
-    document.getElementById(RPGCONV_SELECT_ID).value = next_slide_num;
+    RPGCONV_SELECT_ELEM.value = next_slide_num;
 }
 
 // 自動スイッチON時の処理
