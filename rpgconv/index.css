@@ -170,10 +170,11 @@ body {
 /* アイコン表示エリア */
 .rpgconv-icon-area {
     position: absolute;
-    bottom: 0%;
-    left: 0%;
+    bottom: 7%;
+    left: 5%;
     box-sizing: border-box;
-
+    width: 100px;
+    height: 100px;
 }
 
 /* 音再生エリア */

@@ -5,6 +5,7 @@ export class ScenarioProperty {
     text_arr;
     sound_arr;
     bgm_arr;
+    icon_arr;
 
     constructor() {
         this.slide_num = 0;
@@ -12,6 +13,7 @@ export class ScenarioProperty {
         this.text_arr = [];
         this.sound_arr = [];
         this.bgm_arr = [];
+        this.icon_arr = [];
     }
 
     setSlideNum(slide_num_) {
@@ -54,6 +56,14 @@ export class ScenarioProperty {
         return this.bgm_arr;
     }
 
+    setIconArr(icon_arr_) {
+        this.icon_arr = icon_arr_;
+    }
+
+    getIconArr() {
+        return this.icon_arr;
+    }
+
     // IDもとに画像を設定する
     setImageSrc(elemid, num) {
         // IDから要素を取得する
@@ -72,6 +82,17 @@ export class ScenarioProperty {
 
         // 画像をソースに設定する
         rpgconv_text_elem.innerText = this.text_arr[num];
+
+        return;
+    }
+
+    // IDもとにアイコン画像を設定する
+    setIconSrc(elemid, num) {
+        // IDから要素を取得する
+        let rpgconv_icon_img_elem = document.getElementById(elemid);
+
+        // 画像をソースに設定する
+        rpgconv_icon_img_elem.src = this.icon_arr[num];
 
         return;
     }

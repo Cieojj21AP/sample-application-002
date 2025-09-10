@@ -36,6 +36,8 @@ const RPGCONV_AUDIO_SW_ID = "rpgconv-audio-sw";
 const RPGCONV_AUDIO_SW_ELEM = document.getElementById(RPGCONV_AUDIO_SW_ID);
 const RPGCONV_SOUND_AREA_ID = "rpgconv-sound-area";
 const RPGCONV_SOUND_AREA_ELEM = document.getElementById(RPGCONV_SOUND_AREA_ID);
+const RPGCONV_ICON_IMG_ID = "rpgconv-icon-img";
+const RPGCONV_ICON_IMG_ELEM = document.getElementById(RPGCONV_ICON_IMG_ID);
 // 文字表示の遅延時間
 const DELAY_MS = 50;
 
@@ -50,12 +52,6 @@ let interval_id;
 // ========================================
 // サーバからシナリオデータを受け取る
 function getScenarioData(){
-    var slide_num;
-    let image_arr = [];
-    var text_arr = [];
-    var sound_arr = [];
-    var bgm_arr = [];
-
     // キーワードからインデックスを取得する
     let json_index = String(location.search).substring(1);
 
@@ -64,38 +60,7 @@ function getScenarioData(){
     scenario.setImageArr(jsondata.list[json_index].image_arr);
     scenario.setTextArr(jsondata.list[json_index].text_arr);
     scenario.setSoundArr(jsondata.list[json_index].sound_arr);
-
-    // ★★★
-    // scenario.setSlideNum(10);
-    // scenario.setImageArr(
-    //     [
-    //         "img/black_back.png",
-    //         "img/black_back.png",
-    //         "img/black_back.png",
-    //         "img/black_back.png",
-    //         "img/back1.png",
-    //         "img/back1.png",
-    //         "img/back1.png",
-    //         "img/back2.png",
-    //         "img/back2.png",
-    //         "img/back2.png",
-    //     ]
-    // );
-    // scenario.setTextArr(
-    //     [
-    //         "テキストテキストテキストテキストテキスト0",
-    //         "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキスト1",
-    //         "テキストテキストテキストテキストテキスト2",
-    //         "テキストテキストテキストテキストテキスト3",
-    //         "テキストテキストテキストテキストテキスト4",
-    //         "テキストテキストテキストテキストテキスト5",
-    //         "テキストテキストテキストテキストテキスト6",
-    //         "テキストテキストテキストテキストテキスト7",
-    //         "テキストテキストテキストテキストテキスト8",
-    //         "テキストテキストテキストテキストテキスト9",
-    //     ]
-    // );
-    // ★★★
+    scenario.setIconArr(jsondata.list[json_index].icon_arr);
 
     return;
 }
@@ -138,6 +103,16 @@ function getSlideNum() {
     return RPGCONV_SELECT_ELEM.value;
 }
 
+// アイコン画像を表示する
+function changeIconShow() {
+    RPGCONV_ICON_IMG_ELEM.style.visibility = "visible";
+}
+
+// アイコン画像を非表示する
+function changeIconHidden() {
+    RPGCONV_ICON_IMG_ELEM.style.visibility = "hidden";
+}
+
 // 画面読み込み時の画像表示エリアの処理
 function initialSlide() {
     // 画像ソースを指定する
@@ -145,6 +120,9 @@ function initialSlide() {
 
     // テキストを指定する
     scenario.setTextSrc(RPGCONV_TEXT_ID, 0)
+
+    // アイコンを設定する
+    scenario.setIconSrc(RPGCONV_ICON_IMG_ID, 0)
 
     // スライド番号リストに追加する
     for(let i = 0; i < scenario.getSlideNum(); i++) {
@@ -165,7 +143,7 @@ function initialSlide() {
 }
 
 // スライド変更
-function changeSlide(do_anime_bool_, do_audio_bool_, current_slide_num_, next_slide_num_) {
+function changeSlide(show_txt_bool_ , do_anime_bool_, do_audio_bool_, current_slide_num_, next_slide_num_) {
     // スライドが0（サムネ）の時の処理
     if( current_slide_num_ == 0 ) {
         // テキスト表示スイッチをonにする
@@ -198,6 +176,14 @@ function changeSlide(do_anime_bool_, do_audio_bool_, current_slide_num_, next_sl
         RPGCONV_START_BTN_DIV_ELEM.style.display = "none"
     }
 
+    // テキスト表示SWがONならアイコン画像を更新する
+    if (show_txt_bool_) {
+        changeIconShow();
+        scenario.setIconSrc(RPGCONV_ICON_IMG_ID, next_slide_num_)
+    } else {
+        changeIconHidden();
+    }
+
     // スライドの要素を変更する
     if(do_anime_bool_) {
         // アニメーションSWがONのときはアニメーションをする
@@ -209,6 +195,8 @@ function changeSlide(do_anime_bool_, do_audio_bool_, current_slide_num_, next_sl
             next_slide_num_, 
             2,
             RPGCONV_TEXT_ELEM);
+        // アイコン画像が設定されている場合はIDを変更する
+        
         scenario.animationText(
             RPGCONV_TEXT_ID, 
             DOT_SPAN_CLASS_NAME, 
@@ -234,12 +222,13 @@ function nextSlide() {
     let next_slide_num;
     let do_anime_bool = RPGCONV_ANIME_SW_ELEM.checked;
     let do_audio_bool = RPGCONV_AUDIO_SW_ELEM.checked;
+    let show_txt_bool = RPGCONV_TXT_SW_ELEM.checked;
 
     // スライドを１つ進める
     next_slide_num = Number(current_slide_num) + 1;
 
     // スライド変更
-    changeSlide(do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
+    changeSlide(show_txt_bool, do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
 
     // プルダウンを現在のスライド番号に変更する
     RPGCONV_SELECT_ELEM.value = next_slide_num;
@@ -275,6 +264,7 @@ function jumpSlide() {
     let do_auto_bool = RPGCONV_AUTO_SW_ELEM.checked;
     let do_anime_bool = RPGCONV_ANIME_SW_ELEM.checked;
     let do_audio_bool = RPGCONV_AUDIO_SW_ELEM.checked;
+    let show_txt_bool = RPGCONV_TXT_SW_ELEM.checked;
 
     // 自動SWがONのときはOFFに変更する
     if(do_auto_bool){
@@ -283,7 +273,7 @@ function jumpSlide() {
     }
 
     // 対象のスライドにジャンプする
-    changeSlide(do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
+    changeSlide(show_txt_bool, do_anime_bool, do_audio_bool, current_slide_num, next_slide_num);
 }
 
 // ========================================
@@ -292,12 +282,10 @@ function jumpSlide() {
 // ページ読み込み時に実行したい処理
 window.onload = function() {
     // シナリオデータを受け取る
-    // scenario = getScenarioData();
     getScenarioData();
 
     // 最初のスライド処理
     initialSlide();
-    // initialSlide(scenario);
 
     // アニメーションSWをONにする
     changeAnimeSwitch(true);
@@ -343,10 +331,14 @@ RPGCONV_TXT_SW_ELEM.addEventListener('change', () => {
     if(RPGCONV_TXT_SW_ELEM.checked) {
         // スイッチがONの時は表示する
         RPGCONV_TEXT_ELEM.style.display = "block";
+        // アイコン画像を表示する
+        changeIconShow();
     }
     else {
         // スイッチがOFFの時は非表示する
         RPGCONV_TEXT_ELEM.style.display = "none";
+        // アイコン画像を非表示する
+        changeIconHidden();
     }
 });
 
