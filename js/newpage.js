@@ -47,14 +47,6 @@ function tabopenYoutube() {
 document.getElementById("openYoutube").addEventListener("click", tabopenYoutube);
 
 // 新しいタブでXUlandauを開く
-function tabopenNote() {
-    window.open("https://note.com/landau5/", "_blank");
-}
-
-// リンククリックで関数を実行
-document.getElementById("openNote").addEventListener("click", tabopenNote);
-
-// 新しいタブでXUlandauを開く
 function tabopenDeviantart() {
     window.open("https://www.deviantart.com/landau5526", "_blank");
 }
