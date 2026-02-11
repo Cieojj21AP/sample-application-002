@@ -77,3 +77,19 @@ function tabopenOdaibako() {
 
 // リンククリックで関数を実行
 document.getElementById("openOdaibako").addEventListener("click", tabopenOdaibako);
+
+// 新しいタブでFanboxを開く
+function tabopenFanbox() {
+    window.open("https://landau.fanbox.cc/", "_blank");
+}
+
+// リンククリックで関数を実行
+document.getElementById("openFanbox").addEventListener("click", tabopenFanbox);
+
+// 新しいタブでPatreonを開く
+function tabopenPatreon() {
+    window.open("https://www.patreon.com/landau/", "_blank");
+}
+
+// リンククリックで関数を実行
+document.getElementById("openPatreon").addEventListener("click", tabopenPatreon);
