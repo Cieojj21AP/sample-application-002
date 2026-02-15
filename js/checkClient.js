@@ -4,4 +4,6 @@
 
     const html = await fetch(path).then(res => res.text());
     document.getElementById("app").innerHTML = html;
+
+    setEventOpen();
 })();

@@ -30,6 +30,13 @@ a::after {
   padding: 20px 0;
 }
 
+a.sp-link-btn-con::after {
+  content: "↗";          /* 右上矢印アイコン */
+  font-size: 0.9em;       /* 少し小さめに */
+  color: inherit;         /* リンクと同じ色にする */
+  padding: 10px 0;
+}
+
 footer {
     background-color: black;
     padding: 10px;
@@ -101,8 +108,6 @@ footer {
     display: flex;
     justify-content: flex-start; /* 左右に配置 */
     gap: 10px; /* ボックス間の余白（任意） */
-    /* width: 25vw;
-    height: 10vh; */
 }
 
 .link-btn-box {
@@ -122,4 +127,63 @@ footer {
 .link-pos-box {
     display: flex;
     justify-content: flex-start; /* 左右に配置 */
+}
+
+/* ======================================== */
+/* スマホ用CSS */
+
+/* 宣伝 */
+.sp-myadv {
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+}
+
+.sp-myadv-img {
+    max-width: 80%;
+}
+
+/* DIV並列配置 */
+.sp-container {
+    gap: 20px; /* ボックス間の余白（任意） */
+}
+
+/* DIV並列配置 */
+.sp-box {
+    flex: 1;               /* 幅を均等にする */
+    padding: 20px;         /* 内側余白 */
+}
+
+.sp-h2 {
+    font-size: 25px;
+}
+
+/* リンクボタン */
+.sp-link-btn{
+    background: #1c303b;
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+    margin: 4px;
+    padding: 1px;
+    width: 90%;
+}
+.sp-link-btn:hover{
+    box-shadow: 0 16px 20px -8px rgba(0, 0, 0, 0.4);
+}
+
+.sp-link-btn-box {
+    display: inline-block;
+    /* flex: 1;               幅を均等にする */
+    padding: 10px 0 0 10px;         /* 内側余白 */
+}
+
+/* リンクボタンアイコン画像 */
+.sp-link-icon{
+    max-width: 20px;
+}
+
+/* リンクボタン用コンテナ */
+.sp-link-btn-con {
+    display: flex;
+    justify-content: flex-start; /* 左右に配置 */
+    gap: 10px; /* ボックス間の余白（任意） */
 }
